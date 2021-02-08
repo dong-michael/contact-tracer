@@ -92,7 +92,7 @@ public class VisitorsList {
 
     //REQUIRES:
     //MODIFIES: this
-    //EFFECTS: returns a list of all the people who were present on dateString within (timeString - 2) and (timeString + 2)
+    //EFFECTS: returns a list of all people who were present on dateString within (timeString - 2) and (timeString + 2)
     public List<Person> getVisitorsAtTime(String dateString, String timeString) {
         List<Person> exposed = new ArrayList<>();
 
