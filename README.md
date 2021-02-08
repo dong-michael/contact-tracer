@@ -10,7 +10,8 @@ management of large quantities of contact data easy, and at the same time minimi
 of COVID-19.
 
 
-Some of the features will include:
+Some features will include:
+
 - Easily stores a person's contact information such as **name**, **phone number**,and **who they were
 traveling with**
 - Stores the time, and the date of when the person was present
@@ -27,14 +28,12 @@ data burden on business owners.
 
 ## User stories
 
-- As a user, I want to be able to people to my has-been-here list
-- As a user, I want to be able to enter my name and my contact information
+- As a user, I want to be able to keep a list of everyone's contact information
+- As a user, I want to be able to enter a persons' name, and a phone number
 - As a user, I want to be able to retrieve the names & contact of people that have visited at a certain time or date
-- As a user, I want to be able to delete people from my has-been-here list
-- As a user, I want to be able to the number of people that has visited
-- As a user, I want to be able to see which business locations have had the most exposures
+- As a user, I want to be able to remove people from my has-been-here list
 - As a user, I want to be able to set a person's value to screened positive
 
 
 An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.
+the bold and italic fonts correctly, but they will appear correctly on GitHub.

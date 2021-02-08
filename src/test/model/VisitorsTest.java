@@ -8,23 +8,29 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VisitorsTest {
 
     private VisitorsList testList;
+    private VisitorsList emptyList;
     private Person visitor1;
     private Person visitor2;
     private Person visitor3;
     private Person visitor4;
     private Person visitor5;
 
+
     @BeforeEach
 
     public void setUp() {
         testList = new VisitorsList();
+        emptyList = new VisitorsList();
+
         visitor1 = new Person("Jordon Walker", "6042918371");
         visitor2 = new Person("Paula Griffy", "6049165371");
         visitor3 = new Person("Alan Smith", "6042348421");
         visitor4 = new Person("Jake Shields", "6043093920");
         visitor5 = new Person("Nate Dean", "7782394835");
+
         testList.addPerson(visitor1);
         testList.addPerson(visitor2);
+
 
     }
 
@@ -37,10 +43,7 @@ public class VisitorsTest {
         testList.removePerson(visitor3);
         assertFalse(testList.containsPerson(visitor3));
 
-
-        VisitorsList testListEmpty = new VisitorsList();
-
-        assertFalse(testListEmpty.containsPerson(visitor2));
+        assertFalse(emptyList.containsPerson(visitor2));
 
     }
 
@@ -57,11 +60,10 @@ public class VisitorsTest {
     @Test
     public void getVisitorsOnDayEmptyTest() {
 
-        VisitorsList emptyList = new VisitorsList();
 
-        assertFalse(emptyList.getVisitorsOnDay("21/12/2021").containsPerson(visitor1));
-        assertFalse(emptyList.getVisitorsOnDay("29/12/2030").containsPerson(visitor1));
-        assertFalse(emptyList.getVisitorsOnDay("25/12/2000").containsPerson(visitor1));
+        assertFalse(emptyList.getVisitorsOnDay("21/12/2021").contains(visitor1));
+        assertFalse(emptyList.getVisitorsOnDay("29/12/2030").contains(visitor1));
+        assertFalse(emptyList.getVisitorsOnDay("25/12/2000").contains(visitor1));
 
     }
 
@@ -72,39 +74,38 @@ public class VisitorsTest {
         testList.addPerson(visitor4);
 
         visitor1.setDate("21/12/2021");
-        assertTrue(testList.getVisitorsOnDay("21/12/2021").containsPerson(visitor1));
-        assertFalse(testList.getVisitorsOnDay("21/12/2021").containsPerson(visitor2));
+        assertTrue(testList.getVisitorsOnDay("21/12/2021").contains(visitor1));
+        assertFalse(testList.getVisitorsOnDay("21/12/2021").contains(visitor2));
 
         visitor1.setDate("20/11/2020");
-        assertFalse(testList.getVisitorsOnDay("21/12/2021").containsPerson(visitor1));
+        assertFalse(testList.getVisitorsOnDay("21/12/2021").contains(visitor1));
 
         visitor1.setDate("22/09/2021");
         visitor2.setDate("22/09/2021");
         visitor3.setDate("23/09/2021");
         visitor4.setDate("21/09/2021");
-        assertTrue(testList.getVisitorsOnDay("22/09/2021").containsPerson(visitor1));
-        assertTrue(testList.getVisitorsOnDay("22/09/2021").containsPerson(visitor2));
-        assertFalse(testList.getVisitorsOnDay("22/09/2021").containsPerson(visitor3));
-        assertFalse(testList.getVisitorsOnDay("22/09/2021").containsPerson(visitor4));
+        assertTrue(testList.getVisitorsOnDay("22/09/2021").contains(visitor1));
+        assertTrue(testList.getVisitorsOnDay("22/09/2021").contains(visitor2));
+        assertFalse(testList.getVisitorsOnDay("22/09/2021").contains(visitor3));
+        assertFalse(testList.getVisitorsOnDay("22/09/2021").contains(visitor4));
 
     }
 
 
     @Test
-
     public void getPositiveTest() {
 
-        assertFalse(testList.getPositivePersons().containsPerson(visitor1));
-        assertFalse(testList.getPositivePersons().containsPerson(visitor2));
-        assertFalse(testList.getPositivePersons().containsPerson(visitor3));
+        assertFalse(testList.getPositivePersons().contains(visitor1));
+        assertFalse(testList.getPositivePersons().contains(visitor2));
+        assertFalse(testList.getPositivePersons().contains(visitor3));
 
         visitor2.setStatusPositive();
-        assertTrue(testList.getPositivePersons().containsPerson(visitor2));
-        assertFalse(testList.getPositivePersons().containsPerson(visitor1));
-        assertFalse(testList.getPositivePersons().containsPerson(visitor3));
+        assertTrue(testList.getPositivePersons().contains(visitor2));
+        assertFalse(testList.getPositivePersons().contains(visitor1));
+        assertFalse(testList.getPositivePersons().contains(visitor3));
 
         visitor2.setStatusNegative();
-        assertFalse(testList.getPositivePersons().containsPerson(visitor2));
+        assertFalse(testList.getPositivePersons().contains(visitor2));
     }
 
 
@@ -126,19 +127,19 @@ public class VisitorsTest {
 
         //before or after time with greater or equal to then?
 
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor1));
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor2));
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor3));
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor1));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor2));
+        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor3));
+        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
         //test change in day to match, but not time
 
         visitor4.setDate("22/09/2021");
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor4));
+        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
         //set time to match
         visitor4.setTime("20:30");
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
     }
 
     @Test
@@ -156,34 +157,30 @@ public class VisitorsTest {
         visitor3.setDate("23/09/2021");
 
 
-
         //set time to be within range
         visitor4.setTime("20:30");
         visitor4.setDate("22/09/2021");
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
         //lower boundary test
         visitor4.setTime("22:18");
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor4));
+        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
         //exact match test
         visitor4.setTime("20:19");
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
         //upper boundary test
         visitor4.setTime("22:20");
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").containsPerson(visitor4));
+        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
     }
 
 
-
     @Test
-    public void getSizeTest(){
+    public void getSizeTest() {
 
-        VisitorsList testEmpty = new VisitorsList();
-
-        assertEquals(testEmpty.getSize(), 0);
+        assertEquals(emptyList.getSize(), 0);
 
         assertEquals(testList.getSize(), 2);
 
@@ -197,6 +194,51 @@ public class VisitorsTest {
     }
 
 
-}
+    @Test
+    public void getPersonTest() {
 
+        assertEquals(testList.getPerson("Jordon Walker"), visitor1);
+        assertEquals(testList.getPerson("Nate Dean"), null);
+
+        testList.addPerson(visitor5);
+        assertEquals(testList.getPerson("Nate Dean"), visitor5);
+
+        testList.removePerson(visitor5);
+        assertEquals(testList.getPerson("Nate Dean"), null);
+
+    }
+
+    @Test
+    public void getAllNamesTest() {
+
+        //testing for list size and content
+
+        assertTrue(testList.getAllNames().contains("Jordon Walker"));
+        assertTrue(testList.getAllNames().contains("Paula Griffy"));
+        assertEquals(testList.getAllNames().size(), 2);
+        assertFalse(testList.getAllNames().contains("Nate Dean"));
+
+        //testing for addition of new person
+
+        testList.addPerson(visitor5);
+
+        assertTrue(testList.getAllNames().contains("Nate Dean"));
+        assertEquals(testList.getAllNames().size(), 3);
+
+        //testing for removal of person
+
+        testList.removePerson(visitor2);
+        assertFalse(testList.getAllNames().contains("Paula Griffy"));
+        assertTrue(testList.getAllNames().contains("Jordon Walker"));
+
+        //testing for empty list
+
+        assertFalse(emptyList.getAllNames().contains("Paula Griffy"));
+        assertFalse(emptyList.getAllNames().contains("Jordon Walker"));
+        assertEquals(emptyList.getAllNames().size(), 0);
+
+
+
+    }
+}
 

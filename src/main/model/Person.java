@@ -12,7 +12,7 @@ public class Person {
     private String phoneNumber;
     private LocalDateTime currentDate;
     private Boolean status;
-    //private String location;
+
 
 
     public Person(String name, String phoneNumber) {
@@ -49,7 +49,7 @@ public class Person {
 
     //REQUIRES:
     //MODIFIES: this
-    //EFFECTS: sets the time of the person, in HH/mm
+    //EFFECTS: sets the time of the person to timeString, in HH/mm
     public void setTime(String timeString) {
         LocalTime localTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
         LocalDate localDate = this.currentDate.toLocalDate();
@@ -80,12 +80,6 @@ public class Person {
 
 
 
-//    public static void main(String[] args) {
-//        Person visitor = new Person("Bob Mark", "604 632 3411");
-//        Date date1 = new Date();
-//        visitor.setDate(date1);
-//        visitor.printDateAndTime();
-//    }
 
 
 }

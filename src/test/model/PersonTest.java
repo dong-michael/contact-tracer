@@ -46,6 +46,7 @@ class PersonTest {
 
     @Test
     public void getStatusTest(){
+
         assertFalse(visitor3.getStatus());
         visitor3.setStatusPositive();
         assertTrue(visitor3.getStatus());
