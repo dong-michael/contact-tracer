@@ -125,6 +125,21 @@ public class VisitorsTest {
         visitor3.setDate("23/09/2021");
         visitor4.setDate("21/09/2021");
 
+        //check when time and date results in no matches
+
+        assertFalse(testList.getVisitorsAtTime("22/09/2023", "12:32").contains(visitor1));
+        assertFalse(testList.getVisitorsAtTime("23/09/2021", "00:29").contains(visitor2));
+        assertFalse(testList.getVisitorsAtTime("22/10/2026", "20:12").contains(visitor3));
+        assertFalse(testList.getVisitorsAtTime("20/09/2019", "17:11").contains(visitor4));
+
+        assertEquals(0, testList.getVisitorsAtTime("22/09/2023", "12:32").size());
+        assertEquals(0, testList.getVisitorsAtTime("23/09/2021", "00:29").size());
+        assertEquals(0, testList.getVisitorsAtTime("22/10/2026", "20:12").size());
+        assertEquals(0, testList.getVisitorsAtTime("20/09/2019", "17:11").size());
+
+
+
+
         //before or after time with greater or equal to then?
 
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor1));
@@ -136,10 +151,14 @@ public class VisitorsTest {
 
         visitor4.setDate("22/09/2021");
         assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+        assertEquals(2,testList.getVisitorsAtTime("22/09/2021", "20:19").size());
 
         //set time to match
         visitor4.setTime("20:30");
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+        assertEquals(3,testList.getVisitorsAtTime("22/09/2021", "20:19").size());
+
+
     }
 
     @Test
