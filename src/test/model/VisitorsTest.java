@@ -125,7 +125,7 @@ public class VisitorsTest {
         visitor3.setDate("23/09/2021");
         visitor4.setDate("21/09/2021");
 
-        //check when time and date results in no matches
+        //check when both time and date results in no matches
 
         assertFalse(testList.getVisitorsAtTime("22/09/2023", "12:32").contains(visitor1));
         assertFalse(testList.getVisitorsAtTime("23/09/2021", "00:29").contains(visitor2));
