@@ -105,14 +105,19 @@ public class VisitorsList {
         LocalDateTime lowerBound = dt.minusHours(1);
 
         for (Person p : tracking) {
-            if ((p.getDate().isAfter(lowerBound) || p.getDate().isEqual(lowerBound))
-                    && ((p.getDate().isBefore(upperBound) || p.getDate().isEqual(upperBound)))) {
-                exposed.add(p);
+            if ((p.getDate().isAfter(lowerBound) || p.getDate().isEqual(lowerBound))) {
+                if ((p.getDate().isBefore(upperBound) || p.getDate().isEqual(upperBound))) {
+                    exposed.add(p);
+                }
             }
+
         }
         return exposed;
-
     }
+
+
+
+
 
 
     //REQUIRES:

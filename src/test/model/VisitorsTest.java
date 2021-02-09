@@ -138,9 +138,7 @@ public class VisitorsTest {
         assertEquals(0, testList.getVisitorsAtTime("20/09/2019", "17:11").size());
 
 
-
-
-        //before or after time with greater or equal to then?
+        //before or after time with greater or equal
 
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor1));
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor2));
@@ -182,16 +180,22 @@ public class VisitorsTest {
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
         //lower boundary test
-        visitor4.setTime("22:18");
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+        visitor4.setTime("21:18");
+        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:17").contains(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:18").contains(visitor4));
 
         //exact match test
         visitor4.setTime("20:19");
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
 
         //upper boundary test
-        visitor4.setTime("22:20");
+        visitor4.setTime("21:20");
         assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:20").contains(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:21").contains(visitor4));
+
+
+
 
     }
 
