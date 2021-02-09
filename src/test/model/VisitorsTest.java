@@ -181,6 +181,7 @@ public class VisitorsTest {
 
         //lower boundary test
         visitor4.setTime("21:18");
+        assertFalse(testList.getVisitorsAtTime("22/09/2021", "23:17").contains(visitor4));
         assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:17").contains(visitor4));
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:18").contains(visitor4));
 
