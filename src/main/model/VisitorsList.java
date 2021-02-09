@@ -112,19 +112,6 @@ public class VisitorsList {
         }
         return exposed;
 
-
-//        LocalDate referenceDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-//        LocalTime referenceTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
-//
-//        LocalTime upperBound = referenceTime.plusHours(2);
-//        LocalTime lowerBound = referenceTime.minusHours(2);
-//        for (Person p : tracking) {
-//            if (p.getDate().toLocalDate().isEqual(referenceDate) && (p.getDate().toLocalTime().isAfter(lowerBound)
-//                    && p.getDate().toLocalTime().isBefore(upperBound))) {
-//                exposed.add(p);
-//            }
-//        }
-//        return exposed;
     }
 
 
