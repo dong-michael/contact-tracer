@@ -188,6 +188,7 @@ public class VisitorsTest {
         //exact match test
         visitor4.setTime("20:19");
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+        assertTrue(testList.getVisitorsAtTime("22/09/2021", "21:19").contains(visitor4));
 
         //upper boundary test
         visitor4.setTime("21:20");
