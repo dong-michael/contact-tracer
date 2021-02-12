@@ -2,12 +2,10 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.Month;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/* This class is used for testing the Person class to ensure that all methods are working as intended.*/
 class PersonTest {
 
     private Person visitor1;
@@ -43,6 +41,8 @@ class PersonTest {
         visitor1.setTime("20:20");
         assertEquals(visitor1.getTime(), "20:20");
     }
+
+
 
     @Test
     public void getStatusTest(){

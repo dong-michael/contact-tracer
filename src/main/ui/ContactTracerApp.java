@@ -7,6 +7,11 @@ import model.VisitorsList;
 import java.util.List;
 import java.util.Scanner;
 
+
+/*
+Contact Tracer application. Some implementation methods were borrowed from TellerApp on the course website.
+ */
+
 public class ContactTracerApp {
 
     private Person jake;
@@ -30,14 +35,14 @@ public class ContactTracerApp {
         init();
 
         while (keepGoing) {
-            displayMenu();
-            command = input.next(); //grabs user input
-            command = command.toLowerCase(); //makes it lower case
+            displayMainMenu();
+            command = input.next();
+            command = command.toLowerCase();
 
-            if (command.equals("q")) { //q for quit
+            if (command.equals("q")) {
                 keepGoing = false;
             } else {
-                processCommand(command); //passing command to method
+                processCommand(command);
             }
         }
 
@@ -48,7 +53,7 @@ public class ContactTracerApp {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("a")) {
-            forAdmin();
+            menuForAdmin();
         } else if (command.equals("c")) {
             forCustomer();
         } else {
@@ -76,7 +81,7 @@ public class ContactTracerApp {
     }
 
     // EFFECTS: displays the main menu to user
-    private void displayMenu() {
+    private void displayMainMenu() {
         System.out.println("\nPlease select from:");
         System.out.println("\ta -> admin use (allows user to also view/make changes to contact lists)");
         System.out.println("\tc -> customer use (only allows user to record contact information)");
@@ -85,7 +90,7 @@ public class ContactTracerApp {
 
     // MODIFIES: this
     // EFFECTS: displays admin specific menu to user and processes user command
-    private void forAdmin() {
+    private void menuForAdmin() {
         System.out.println("Admin Use");
         System.out.println("Please choose from:");
         System.out.println("\tr -> register contact information");
@@ -107,8 +112,8 @@ public class ContactTracerApp {
     }
 
     //MODIFIES: this
-    //EFFECTS: displays view options to users and modifies a person's date, time, or status
-    private void viewPersons() {
+    //EFFECTS: displays view options to user and processes user command
+    private void viewStoredPersons() {
         System.out.println("Viewing Selected");
         System.out.println("Please choose from:");
         System.out.println("\tvd -> View a list of people that came in on a certain day");
@@ -127,7 +132,7 @@ public class ContactTracerApp {
 
         } else if (choice.equals("vp")) {
             System.out.println("Here is a list of the people that screened positive so far:");
-            viewAllPositive();
+            viewAllPositiveCustomers();
 
         } else {
             System.out.println("Selection is not valid please try again.");
@@ -136,8 +141,8 @@ public class ContactTracerApp {
 
 
     //MODIFIES: this
-    //EFFECTS: displays names of people whose status is positive for COVID
-    private void viewAllPositive() {
+    //EFFECTS: displays names of people whose status is positive
+    private void viewAllPositiveCustomers() {
         List<Person> filteredPositive = store.getPositivePersons();
 
         for (Person p : filteredPositive) {
@@ -146,8 +151,8 @@ public class ContactTracerApp {
     }
 
 
-    //MODIFIES: this
-    //EFFECTS: displays names of all customer that came in on user a specified date
+    //REQUIRES: date must be in format dd/MM//YYYY
+    //EFFECTS: displays names of all customers that came in on user a specified date
     private void viewCustomersOnDay() {
         String date = input.next();
         System.out.println("Here is a list of the people that came in on " + date + ":");
@@ -158,7 +163,7 @@ public class ContactTracerApp {
 
     }
 
-    //MODIFIES: this
+    //REQUIRES: date and time must be in format DD//MM//YYYY and HH:mm
     //EFFECTS: displays a list of people that came in on a user specified date and time
     private void viewCustomersAtTime() {
 
@@ -182,7 +187,7 @@ public class ContactTracerApp {
 
 
     //MODIFIES: this
-    //EFFECTS: processes user command
+    //EFFECTS: displays modification menu to user and processes user command
     private void modifyPersons() {
         displayModifyPersonMenu();
 
@@ -208,16 +213,17 @@ public class ContactTracerApp {
             displayAllNames();
             personDateUpdate();
 
-
         } else {
             System.out.println("Selection is not valid please try again.");
         }
     }
 
-    //EFFECTS: prompts user to make a selection from a list of persons
+
+    //EFFECTS: prints prompt for user to make a selection from a list of persons
     private void displayAllVisitorsMenu() {
         System.out.println("Please choose a person to update from the following list:");
     }
+
 
     //EFFECTS: displays modify menu to user
     private void displayModifyPersonMenu() {
@@ -229,6 +235,7 @@ public class ContactTracerApp {
         System.out.println("\td -> Change a person's date of arrival");
     }
 
+    //REQUIRES: person must already be in visitor's list
     //MODIFIES: this
     //EFFECTS: deletes user specified person from storage
     private void personDeleteUpdate() {
@@ -271,7 +278,7 @@ public class ContactTracerApp {
         System.out.println("Time of " + firstName + " " + lastName + " updated successfully.");
     }
 
-
+    //REQUIRES: date entered must be in format DD/MM/YYYY
     //MODIFIES: this
     //EFFECTS: updates the selected person's date to newDate
     private void personDateUpdate() {
@@ -335,7 +342,7 @@ public class ContactTracerApp {
         String choice = input.next();
 
         if (choice.equals("v")) {
-            viewPersons();
+            viewStoredPersons();
         } else if (choice.equals("m")) {
             modifyPersons();
         } else {
@@ -366,8 +373,9 @@ public class ContactTracerApp {
         System.out.println("Registration successful, thank you!");
     }
 
+
     //MODIFIES: this
-    //EFFECTS: displays menu of options to customer user and takes user input
+    //EFFECTS: displays menu of options to customer user and processes user input
     private void forCustomer() {
         System.out.println("Customer Use");
         System.out.println("Please choose from:");
@@ -385,9 +393,9 @@ public class ContactTracerApp {
         }
     }
 
+
     //MODIFIES: this
     //EFFECTS: displays all contact names stored to user
-
     private void displayAllNames() {
         for (String name : store.getAllNames()) {
             System.out.println(name);

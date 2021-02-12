@@ -1,7 +1,6 @@
 package model;
 
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -9,6 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+This class is designed to store all of the people that have been recorded by the user. It includes methods that is only,
+related to this VisitorsList class such as the removal or addition of a Person to this list.
+*/
 public class VisitorsList {
 
     private List<Person> tracking;
@@ -16,12 +19,12 @@ public class VisitorsList {
 
     //CONSTRUCTOR
     public VisitorsList() {
-        tracking = new ArrayList<Person>();
+        tracking = new ArrayList<>();
     }
 
-    //REQUIRES: person to be in VisitorsList
-    //MODIFIES: this
-    //EFFECTS: returns the person in the list, void otherwise
+
+    //REQUIRES: Person must be in VisitorsList
+    //EFFECTS: returns the name of the person in the list, null otherwise
     public Person getPerson(String name) {
         for (Person p : tracking) {
             if (p.getName().equals(name)) {
@@ -31,37 +34,37 @@ public class VisitorsList {
         return null;
     }
 
-    //REQUIRES: requires Person to be present in list
+    //REQUIRES: requires Person to be in the list
     //MODIFIES: this
-    //EFFECTS: removes visitor from visitors list
+    //EFFECTS: removes person from visitors list
     public void removePerson(Person person) {
         tracking.remove(person);
     }
 
 
-    //REQUIRES:
+    //REQUIRES: person != null
     //MODIFIES: this
-    //EFFECTS: adds a person to visitors list
+    //EFFECTS: adds the person to visitor's list
     public void addPerson(Person person) {
         tracking.add(person);
     }
 
 
+    //EFFECTS: returns true if Person is in list, false otherwise
     public boolean containsPerson(Person person) {
         return tracking.contains(person);
     }
 
-    //REQUIRES:
-    //MODIFIES: this
-    //EFFECTS: returns the of persons in the VisitorsList
+
+    //EFFECTS: returns the number of persons in the list
     public int getSize() {
         return tracking.size();
     }
 
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS: returns a list of all the people who visited on that day
+    //REQUIRES: date must be a valid day in format dd/MM/yyyy
+    //MODIFIES: this
+    //EFFECTS: returns a list of all the people who visited on date entered
     public List<Person> getVisitorsOnDay(String date) {
         List<Person> seenBefore = new ArrayList<>();
 
@@ -75,9 +78,10 @@ public class VisitorsList {
         return seenBefore;
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS: returns a list of people who are whose status is positive
+
+
+    //MODIFIES: this
+    //EFFECTS: returns a list of people whose status is positive
     public List<Person> getPositivePersons() {
         List<Person> positive = new ArrayList<>();
 
@@ -90,7 +94,7 @@ public class VisitorsList {
     }
 
 
-    //REQUIRES:
+    //REQUIRES: time must be entered in format HH:mm in 24 hour format
     //MODIFIES: this
     //EFFECTS: returns a list of all people who were present on dateString within (timeString - 2) and (timeString + 2)
     public List<Person> getVisitorsAtTime(String dateString, String timeString) {
@@ -116,21 +120,14 @@ public class VisitorsList {
     }
 
 
-
-
-
-
-    //REQUIRES:
     //MODIFIES: this
-    //EFFECTS: returns a list of all the names of the person who has visited
-
+    //EFFECTS: returns a list of all the names of all people who have stored
     public List<String> getAllNames() {
-        List<String> allNames = new ArrayList();
+        List<String> allNames = new ArrayList<>();
 
         for (Person p : tracking) {
             allNames.add(p.getName());
         }
-
         return allNames;
     }
 

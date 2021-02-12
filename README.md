@@ -12,11 +12,10 @@ of COVID-19.
 
 Some features will include:
 
-- Easily stores a person's contact information such as **name**, **phone number**,and **who they were
-traveling with**
+- Stores a person's contact information such as **name** and **phone number**
 - Stores the time, and the date of when the person was present
-- Is able to retrieve a list of people who were present at a specified time and date
-- can be used by customers to enter their information *or* by business owners to perform
+- Retrieve a list of people who were present at a specified time and date
+- Can be used by customers to enter their information *or* by business owners to perform
 contact tracing
 - Can be used by business owners to keep track of multiple business locations
 
@@ -28,12 +27,10 @@ data burden on business owners.
 
 ## User stories
 
-- As a user, I want to be able to keep a list of everyone's contact information
-- As a user, I want to be able to enter a persons' name, and a phone number
-- As a user, I want to be able to retrieve the names & contact of people that have visited at a certain time or date
-- As a user, I want to be able to remove people from my has-been-here list
-- As a user, I want to be able to set a person's value to screened positive
+- As a user, I want to be able to enter a persons' name and phone number and store it in a visitor's list
+- As a user, I want to be able to retrieve the names & phone number of people in my visitor's list that came in on a certain time or date
+- As a user, I want to be able to remove people from my visitor's list
+- As a user, I want to be able to retrieve the names of people who have screened positive from my visitor's list
+- As a user, I want to be able to change the date or time of people in my visitor's list
+- As a user, I want to be able to change the status of a person in my visitor's list
 
-
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly, but they will appear correctly on GitHub.

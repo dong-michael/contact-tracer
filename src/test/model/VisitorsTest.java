@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/* This class is used for testing of the VisitorsList class to ensure all methods are working as intended.*/
 public class VisitorsTest {
 
     private VisitorsList testList;
@@ -17,7 +18,6 @@ public class VisitorsTest {
 
 
     @BeforeEach
-
     public void setUp() {
         testList = new VisitorsList();
         emptyList = new VisitorsList();
@@ -59,7 +59,6 @@ public class VisitorsTest {
 
     @Test
     public void getVisitorsOnDayEmptyTest() {
-
 
         assertFalse(emptyList.getVisitorsOnDay("21/12/2021").contains(visitor1));
         assertFalse(emptyList.getVisitorsOnDay("29/12/2030").contains(visitor1));
@@ -261,7 +260,6 @@ public class VisitorsTest {
         assertFalse(emptyList.getAllNames().contains("Paula Griffy"));
         assertFalse(emptyList.getAllNames().contains("Jordon Walker"));
         assertEquals(emptyList.getAllNames().size(), 0);
-
 
 
     }
