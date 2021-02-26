@@ -33,4 +33,6 @@ data burden on business owners.
 - As a user, I want to be able to retrieve the names of people who have screened positive from my visitor's list
 - As a user, I want to be able to change the date or time of people in my visitor's list
 - As a user, I want to be able to change the status of a person in my visitor's list
+- As a user, I want to be able to save my visitor's list
+- As a user, I want to be able to reload my visitor's list and resume exactly where I left off at some earlier time
 
