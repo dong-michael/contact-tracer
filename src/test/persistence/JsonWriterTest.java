@@ -51,7 +51,7 @@ public class JsonWriterTest extends JsonTest{
             Person p1 = new Person("John Kav", "7782231254");
             Person p2 = new Person ("Sam Noei", "6045239283");
 
-            p1.setDate("25/02/2021");
+            p1.setDate("25/10/2021");
             p1.setStatusPositive();
             p1.setTime("10:00");
 
@@ -73,7 +73,7 @@ public class JsonWriterTest extends JsonTest{
             assertEquals(2, persons.size());
 
 
-            checkPerson("John Kav", "7782231254","10:00", 25, Month.FEBRUARY, 2021,
+            checkPerson("John Kav", "7782231254","10:00", 25, Month.OCTOBER, 2021,
                     true, persons.get(0));
             checkPerson("Sam Noei", "6045239283", "22:21", 22, Month.JANUARY, 2020,
                     false, persons.get(1));

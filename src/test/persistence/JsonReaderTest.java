@@ -48,7 +48,7 @@ public class JsonReaderTest extends JsonTest{
             List<Person> persons = vl.getAllPersons();
             assertEquals(2, persons.size());
 
-            checkPerson("John Kav", "7782231254","10:00", 25, Month.FEBRUARY, 2021,
+            checkPerson("John Kav", "7782231254","10:00", 25, Month.OCTOBER, 2021,
                     true, persons.get(0));
 
             checkPerson("Sam Noei", "6045239283", "22:21", 22, Month.JANUARY, 2020,

@@ -120,7 +120,8 @@ public class Person implements WriteableJ {
         if (month < 10) {
             formatedMonth = "0" + month;
         } else {
-            formatedMonth = "month";
+            Integer monthInteger = month;
+            formatedMonth = Integer.toString(monthInteger);
         }
 
         String date = day + "/" + formatedMonth + "/" + year;
