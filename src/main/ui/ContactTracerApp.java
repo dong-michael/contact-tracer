@@ -2,8 +2,11 @@ package ui;
 
 import model.Person;
 import model.VisitorsList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,11 +23,18 @@ public class ContactTracerApp {
     private VisitorsList store;
     private Scanner input;
     private boolean keepGoing;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/visitorslist.json";
+
 
     // EFFECTS: runs the ContactTracer application
-    public ContactTracerApp() {
+    public ContactTracerApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runTracer();
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes user input
@@ -56,6 +66,10 @@ public class ContactTracerApp {
             menuForAdmin();
         } else if (command.equals("c")) {
             forCustomer();
+        } else if (command.equals("s")) {
+            saveVisitorsList();
+        } else if (command.equals("l")) {
+            loadVisitorsList();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -85,12 +99,15 @@ public class ContactTracerApp {
         System.out.println("\nPlease select from:");
         System.out.println("\ta -> admin use (allows user to also view/make changes to contact lists)");
         System.out.println("\tc -> customer use (only allows user to record contact information)");
+        System.out.println("\ts -> save registered information");
+        System.out.println("\tl -> load previously saved session");
         System.out.println("\tq -> quit");
     }
 
     // MODIFIES: this
     // EFFECTS: displays admin specific menu to user and processes user command
     private void menuForAdmin() {
+
         System.out.println("Admin Use");
         System.out.println("Please choose from:");
         System.out.println("\tr -> register contact information");
@@ -380,12 +397,15 @@ public class ContactTracerApp {
         System.out.println("Customer Use");
         System.out.println("Please choose from:");
         System.out.println("\tr -> register contact information");
+        System.out.println("\ts -> save registered information");
         System.out.println("\tq -> quit");
 
-        String adminInput = input.next();
+        String adminInput = input.next().toLowerCase();
 
         if (adminInput.equals("r")) {
             registerContact();
+        } else if (adminInput.equals("s")) {
+            saveVisitorsList();
         } else if (adminInput.equals("q")) {
             keepGoing = false;
         } else {
@@ -402,6 +422,29 @@ public class ContactTracerApp {
         }
     }
 
+    // EFFECTS: saves the VisitorsList to file
+    private void saveVisitorsList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(store);
+            jsonWriter.close();
+            System.out.println("Saved " + "Visitor's List" + " to " + JSON_STORE);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadVisitorsList() {
+        try {
+            store = jsonReader.read();
+            System.out.println("Loaded " + "VisitorsList" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 }
 

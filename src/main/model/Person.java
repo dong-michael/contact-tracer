@@ -1,9 +1,15 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.WriteableJ;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import static java.time.format.DateTimeFormatter.ofPattern;
+import static java.time.temporal.ChronoUnit.*;
 
 /*
 This Person class is designed to represent each individual, that the user wishes to record or keep track of.
@@ -11,7 +17,7 @@ It allows the user to create a person with name, phone number, status, along wit
 the individual arrived.
 */
 
-public class Person {
+public class Person implements WriteableJ {
 
     private String name;
     private String phoneNumber;
@@ -50,7 +56,11 @@ public class Person {
     //EFFECTS: returns the recorded time of the person as a string in format HH:mm
     public String getTime() {
         LocalTime time = this.currentDate.toLocalTime();
-        return String.valueOf(time.getHour()) + ":" + String.valueOf(time.getMinute());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        String formatTime = time.format(formatter);
+        return formatTime;
+
     }
 
 
@@ -58,7 +68,7 @@ public class Person {
     //MODIFIES: this
     //EFFECTS: sets the time of the person to timeString, in HH/mm in a 24 hour format.
     public void setTime(String timeString) {
-        LocalTime localTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime localTime = LocalTime.parse(timeString, ofPattern("HH:mm"));
         LocalDate localDate = this.currentDate.toLocalDate();
         currentDate = localDate.atTime(localTime);
     }
@@ -68,7 +78,7 @@ public class Person {
     //MODIFIES: this
     //EFFECTS: sets the date of visit in format dd/MM/yyyy
     public void setDate(String dateString) {
-        LocalDate localDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate localDate = LocalDate.parse(dateString, ofPattern("dd/MM/yyyy"));
         LocalTime time = this.currentDate.toLocalTime();
         currentDate = localDate.atTime(time);
     }
@@ -88,4 +98,40 @@ public class Person {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+
+        //String time = currentDate.truncatedTo(MINUTES).toLocalTime().toString();
+
+        LocalTime time2 = currentDate.toLocalTime();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        String time = time2.format(formatter);
+
+
+        int day = currentDate.toLocalDate().getDayOfMonth();
+        int month = currentDate.toLocalDate().getMonthValue();
+        int year = currentDate.toLocalDate().getYear();
+
+        String formatedMonth;
+
+        if (month < 10) {
+            formatedMonth = "0" + month;
+        } else {
+            formatedMonth = "month";
+        }
+
+        String date = day + "/" + formatedMonth + "/" + year;
+
+        jsonObject.put("name", name);
+        jsonObject.put("phoneNumber", phoneNumber);
+        jsonObject.put("time", time);
+        jsonObject.put("date", date);
+        jsonObject.put("status", status);
+
+        return jsonObject;
+
+    }
 }

@@ -1,6 +1,10 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.WriteableJ;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,7 +16,7 @@ import java.util.List;
 This class is designed to store all of the people that have been recorded by the user. It includes methods that is only,
 related to this VisitorsList class such as the removal or addition of a Person to this list.
 */
-public class VisitorsList {
+public class VisitorsList implements WriteableJ {
 
     private List<Person> tracking;
 
@@ -79,7 +83,6 @@ public class VisitorsList {
     }
 
 
-
     //MODIFIES: this
     //EFFECTS: returns a list of people whose status is positive
     public List<Person> getPositivePersons() {
@@ -132,6 +135,27 @@ public class VisitorsList {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("tracking", trackingToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray trackingToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Person p : tracking) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
+    }
+
+    //EFFECTS: returns a list of all persons
+
+    public List<Person> getAllPersons() {
+        return tracking;
+    }
 }
 
 

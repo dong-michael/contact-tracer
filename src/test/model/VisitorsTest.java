@@ -261,7 +261,14 @@ public class VisitorsTest {
         assertFalse(emptyList.getAllNames().contains("Jordon Walker"));
         assertEquals(emptyList.getAllNames().size(), 0);
 
+    }
 
+    @Test
+    public void getAllPersonsTest(){
+
+        assertEquals(testList.getAllPersons().size(), 2);
+        assertTrue(testList.getAllPersons().contains(visitor1));
+        assertTrue(testList.getAllPersons().contains(visitor2));
     }
 }
 
