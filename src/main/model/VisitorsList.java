@@ -136,6 +136,7 @@ public class VisitorsList implements WriteableJ {
 
 
     @Override
+    //EFFECTS: creates new JSON object and adds contents of tracking to it
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("tracking", trackingToJson());
@@ -151,8 +152,8 @@ public class VisitorsList implements WriteableJ {
         return jsonArray;
     }
 
-    //EFFECTS: returns a list of all persons
 
+    //EFFECTS: returns a list of all persons
     public List<Person> getAllPersons() {
         return tracking;
     }

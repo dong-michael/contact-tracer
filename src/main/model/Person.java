@@ -99,37 +99,26 @@ public class Person implements WriteableJ {
 
 
     @Override
+    //EFFECTS: creates a new JSONObject, and stores all fields within the object
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
 
-        //String time = currentDate.truncatedTo(MINUTES).toLocalTime().toString();
 
         LocalTime time2 = currentDate.toLocalTime();
+        LocalDate date2 = currentDate.toLocalDate();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        String time = time2.format(formatter);
 
+        String timeFormated = time2.format(formatter);
+        String dateFormated = date2.format(formatterDate);
 
-        int day = currentDate.toLocalDate().getDayOfMonth();
-        int month = currentDate.toLocalDate().getMonthValue();
-        int year = currentDate.toLocalDate().getYear();
-
-        String formatedMonth;
-
-        if (month < 10) {
-            formatedMonth = "0" + month;
-        } else {
-            Integer monthInteger = month;
-            formatedMonth = Integer.toString(monthInteger);
-        }
-
-        String date = day + "/" + formatedMonth + "/" + year;
 
         jsonObject.put("name", name);
         jsonObject.put("phoneNumber", phoneNumber);
-        jsonObject.put("time", time);
-        jsonObject.put("date", date);
+        jsonObject.put("time", timeFormated);
+        jsonObject.put("date", dateFormated);
         jsonObject.put("status", status);
 
         return jsonObject;

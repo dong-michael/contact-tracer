@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+
 import java.util.stream.Stream;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads visitorslist from JSON data stored in file
+// Code taken and modified from JsonSerializationDemo. URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 public class JsonReader {
 
     private String source;
@@ -22,7 +24,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads visitorslist from file and returns it;
     // throws IOException if an error occurs reading data from file
     public VisitorsList read() throws IOException {
         String jsonData = readFile(source);
@@ -42,14 +44,13 @@ public class JsonReader {
 
     // EFFECTS: parses workroom from JSON object and returns it
     private VisitorsList parseVisitorsList(JSONObject jsonObject) {
-        //String name = jsonObject.getString("tracking");
         VisitorsList vl = new VisitorsList();
         addPersons(vl, jsonObject);
         return vl;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: vl
+    // EFFECTS: parses person from JSON object and adds them to visitorslist
     private void addPersons(VisitorsList vl, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("tracking");
         for (Object json : jsonArray) {

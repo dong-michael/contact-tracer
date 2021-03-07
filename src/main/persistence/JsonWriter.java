@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 
 
 // Represents a writer that writes JSON representation of workroom to file
+// Code taken and modified from JsonSerializationDemo. URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonWriter {
 
     private static final int TAB = 3;
