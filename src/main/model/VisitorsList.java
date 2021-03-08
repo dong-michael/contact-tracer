@@ -143,7 +143,7 @@ public class VisitorsList implements WriteableJ {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns things in this visitorslist as a JSON array
     private JSONArray trackingToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Person p : tracking) {

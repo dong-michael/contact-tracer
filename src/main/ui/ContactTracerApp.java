@@ -422,7 +422,7 @@ public class ContactTracerApp {
         }
     }
 
-    // EFFECTS: saves the VisitorsList to file
+    // EFFECTS: saves the visitorslist to file
     private void saveVisitorsList() {
         try {
             jsonWriter.open();
@@ -436,7 +436,7 @@ public class ContactTracerApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads visitorslist from file
     private void loadVisitorsList() {
         try {
             store = jsonReader.read();

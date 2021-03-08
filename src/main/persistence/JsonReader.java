@@ -42,7 +42,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses visitorslist from JSON object and returns it
     private VisitorsList parseVisitorsList(JSONObject jsonObject) {
         VisitorsList vl = new VisitorsList();
         addPersons(vl, jsonObject);
@@ -60,7 +60,7 @@ public class JsonReader {
     }
 
     // MODIFIES: vl
-    // EFFECTS: parses thingy from JSON object and adds it to visitorslist
+    // EFFECTS: parses person from JSON object and adds it to visitorslist
     private void addPerson(VisitorsList vl, JSONObject jsonObject) {
 
         String name = jsonObject.getString("name");
