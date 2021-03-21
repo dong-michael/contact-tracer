@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.json.JSONObject;
 import persistence.WriteableJ;
 
@@ -97,6 +98,20 @@ public class Person implements WriteableJ {
         this.status = false;
     }
 
+    //TODO
+    //modifies: this
+    //EFFECTS: sets the name of the person
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //TODO
+    //modifies: this
+    //EFFECTS: sets the name of the person
+    public void setPhoneNumber(String number) {
+        this.phoneNumber = number;
+    }
+
 
     @Override
     //EFFECTS: creates a new JSONObject, and stores all fields within the object
@@ -108,6 +123,8 @@ public class Person implements WriteableJ {
         LocalDate date2 = currentDate.toLocalDate();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+
         DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 

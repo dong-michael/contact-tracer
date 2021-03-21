@@ -157,6 +157,12 @@ public class VisitorsList implements WriteableJ {
     public List<Person> getAllPersons() {
         return tracking;
     }
+
+
+    //EFFECTS: clears visitorslist
+    public void clearVisitors() {
+        tracking.clear();
+    }
 }
 
 
