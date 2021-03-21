@@ -1,6 +1,5 @@
 package model;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.json.JSONObject;
 import persistence.WriteableJ;
 
@@ -52,6 +51,7 @@ public class Person implements WriteableJ {
     public LocalDateTime getDate() {
         return this.currentDate;
     }
+
 
     //REQUIRES: person != null
     //EFFECTS: returns the recorded time of the person as a string in format HH:mm
