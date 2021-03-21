@@ -98,14 +98,14 @@ public class Person implements WriteableJ {
         this.status = false;
     }
 
-    //TODO
+
     //modifies: this
     //EFFECTS: sets the name of the person
     public void setName(String name) {
         this.name = name;
     }
 
-    //TODO
+
     //modifies: this
     //EFFECTS: sets the name of the person
     public void setPhoneNumber(String number) {
