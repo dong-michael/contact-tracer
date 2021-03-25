@@ -270,5 +270,12 @@ public class VisitorsTest {
         assertTrue(testList.getAllPersons().contains(visitor1));
         assertTrue(testList.getAllPersons().contains(visitor2));
     }
+
+    @Test
+    public void clearVisitorsTest(){
+        assertEquals(testList.getAllNames().size(), 2);
+        testList.clearVisitors();
+        assertEquals(testList.getSize(), 0);
+    }
 }
 
