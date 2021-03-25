@@ -55,4 +55,17 @@ class PersonTest {
     }
 
 
+    @Test
+    public void setNameAndNumberTest(){
+
+        visitor2.setName("Lucas Car");
+        assertEquals(visitor2.getName(), "Lucas Car");
+
+        visitor2.setPhoneNumber("7782293012");
+        assertEquals(visitor2.getPhoneNumber(), "7782293012");
+
+
+    }
+
+
 }
