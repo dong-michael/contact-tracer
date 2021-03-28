@@ -16,7 +16,6 @@ public class VisitorsTest {
     private Person visitor4;
     private Person visitor5;
 
-
     @BeforeEach
     public void setUp() {
         testList = new VisitorsList();
@@ -195,9 +194,6 @@ public class VisitorsTest {
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:20").contains(visitor4));
         assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:21").contains(visitor4));
 
-
-
-
     }
 
 
@@ -260,12 +256,10 @@ public class VisitorsTest {
         assertFalse(emptyList.getAllNames().contains("Paula Griffy"));
         assertFalse(emptyList.getAllNames().contains("Jordon Walker"));
         assertEquals(emptyList.getAllNames().size(), 0);
-
     }
 
     @Test
     public void getAllPersonsTest(){
-
         assertEquals(testList.getAllPersons().size(), 2);
         assertTrue(testList.getAllPersons().contains(visitor1));
         assertTrue(testList.getAllPersons().contains(visitor2));

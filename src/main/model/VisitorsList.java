@@ -20,12 +20,10 @@ public class VisitorsList implements WriteableJ {
 
     private List<Person> tracking;
 
-
     //CONSTRUCTOR
     public VisitorsList() {
         tracking = new ArrayList<>();
     }
-
 
     //REQUIRES: Person must be in VisitorsList
     //EFFECTS: returns the name of the person in the list, null otherwise
@@ -152,13 +150,12 @@ public class VisitorsList implements WriteableJ {
         return jsonArray;
     }
 
-
     //EFFECTS: returns a list of all persons
     public List<Person> getAllPersons() {
         return tracking;
     }
 
-
+    //MODIFIES: this
     //EFFECTS: clears visitorslist
     public void clearVisitors() {
         tracking.clear();

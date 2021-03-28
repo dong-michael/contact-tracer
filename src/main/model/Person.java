@@ -118,19 +118,14 @@ public class Person implements WriteableJ {
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
 
-
         LocalTime time2 = currentDate.toLocalTime();
         LocalDate date2 = currentDate.toLocalDate();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-
         DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
 
         String timeFormated = time2.format(formatter);
         String dateFormated = date2.format(formatterDate);
-
 
         jsonObject.put("name", name);
         jsonObject.put("phoneNumber", phoneNumber);

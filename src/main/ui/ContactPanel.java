@@ -21,7 +21,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 
-
+// This class is dedicated to implementation of a GUI for contact tracing
+// Play button sound effect developed from code, modified from this tutorial: http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
+// Table row selection was developed from code, modified from this tutorial: https://www.codejava.net/java-se/swing/jtable-popup-menu-example
 public class ContactPanel extends JPanel {
 
     private JPopupMenu popUp;
@@ -39,7 +41,8 @@ public class ContactPanel extends JPanel {
     private VisitorsList store = null;
     private static final String JSON_STORE = "./data/visitorslist.json";
 
-
+    //CONSTRUCTOR
+    //EFFECTS: initializes new table model, popup menu, data persistence components
     public ContactPanel() {
 
         super(new BorderLayout());
@@ -55,6 +58,8 @@ public class ContactPanel extends JPanel {
 
         adjustColumns();
 
+
+        //create new popup menu
         popUp = new JPopupMenu();
         menuAdd = new JMenuItem("Add New Contact");
         menuRemove = new JMenuItem("Remove Contact");
@@ -81,7 +86,7 @@ public class ContactPanel extends JPanel {
         jsonReader = new JsonReader(JSON_STORE);
     }
 
-
+    //EFFECTS: adjust each table column to preferred width
     private void adjustColumns() {
         TableColumn column;
         for (int i = 0; i < 5; i++) {
@@ -96,7 +101,7 @@ public class ContactPanel extends JPanel {
         }
     }
 
-
+    //EFFECTS: creates and add buttons to JPanel
     private void addButtonsPanel() {
 
         load = new JButton("Load saved data");
@@ -116,7 +121,8 @@ public class ContactPanel extends JPanel {
         add(controlPanel, BorderLayout.PAGE_END);
     }
 
-
+    //MODIFIES: this
+    //EFFECTS: initializes and loads all buttons
     public void initializeButtonActions() {
         load.setActionCommand("load");
         load.addActionListener(new ButtonAction());
@@ -134,6 +140,7 @@ public class ContactPanel extends JPanel {
         }
 
         @Override
+        //EFFECTS: performs load visitorslist, savevistorslist, or clear visitorslist, depending on user action.
         public void actionPerformed(ActionEvent e) {
             if ("load".equals(e.getActionCommand())) {
                 loadVisitorsList();
@@ -158,11 +165,13 @@ public class ContactPanel extends JPanel {
 
     public class PopAction extends AbstractAction {
 
+        //CONSTRUCTOR
         PopAction() {
             super("Popup Action");
         }
 
         @Override
+        //EFFECTS: adds a new row to the table if add button is pressed or, removed current row if button is pressed
         public void actionPerformed(ActionEvent event) {
 
             JMenuItem menu = (JMenuItem) event.getSource();
@@ -180,11 +189,13 @@ public class ContactPanel extends JPanel {
 
         private JTable table1;
 
+        //CONSTRUCTOR
         public TableMouseListener(JTable table) {
             this.table1 = table;
         }
 
         @Override
+        //EFFECTS: highlights the current row in the table when clicked
         public void mousePressed(MouseEvent e) {
             Point point = e.getPoint();
             int currentRow = table1.rowAtPoint(point);
