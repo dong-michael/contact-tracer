@@ -133,6 +133,7 @@ public class ContactPanel extends JPanel {
     }
 
 
+    // This class provides the button action behaviour when a button is pressed
     public class ButtonAction extends AbstractAction {
 
         ButtonAction() {
@@ -184,7 +185,7 @@ public class ContactPanel extends JPanel {
 
     }
 
-
+    // this class allows the rows on the table to be highlighted
     public class TableMouseListener extends MouseAdapter {
 
         private JTable table1;
@@ -234,7 +235,7 @@ public class ContactPanel extends JPanel {
         }
     }
 
-
+    // this class models the data in the form of a table
     class MyTableModel extends AbstractTableModel {
 
 
