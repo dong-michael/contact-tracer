@@ -72,12 +72,10 @@ public class JsonReader {
 
         Person p = new Person(name, phoneNumber);
 
-        try {
-            p.setTime(time);
-            p.setDate(date);
-        } catch (InvalidInputFormatException e) {
-            e.printStackTrace();
-        }
+
+        p.setTime(time);
+        p.setDate(date);
+
 
         if (status) {
             p.setStatusPositive();

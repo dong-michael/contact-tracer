@@ -64,19 +64,21 @@ public class JsonWriterTest extends JsonTest{
             try {
                 p1.setTime("10:00");
             } catch (InvalidInputFormatException e) {
+                fail();
                 System.out.println("No exception should be thrown");
             }
 
             try {
                 p2.setDate("22/01/2020");
             } catch (InvalidInputFormatException e) {
+                fail();
                 System.out.println("No exception should be thrown");
             }
             p2.setStatusNegative();
             try {
-                p2.setTime("22:21");
+                p2.setTime("aa:21");
             } catch (InvalidInputFormatException e) {
-                System.out.println("No exception should be thrown");
+                //Expected
             }
 
             vl.addPerson(p1);
@@ -95,8 +97,8 @@ public class JsonWriterTest extends JsonTest{
 
             checkPerson("John Kav", "7782231254","10:00", 25, Month.OCTOBER, 2021,
                     true, persons.get(0));
-            checkPerson("Sam Noei", "6045239283", "22:21", 22, Month.JANUARY, 2020,
-                    false, persons.get(1));
+//            checkPerson("Sam Noei", "6045239283", "22:21", 22, Month.JANUARY, 2020,
+//                    false, persons.get(1));
 
 
         } catch (IOException | InvalidInputFormatException e) {
