@@ -452,7 +452,7 @@ public class ContactTracerApp {
         try {
             store = jsonReader.read();
             System.out.println("Loaded " + "VisitorsList" + " from " + JSON_STORE);
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputFormatException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }

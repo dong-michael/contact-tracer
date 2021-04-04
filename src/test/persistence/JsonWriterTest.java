@@ -40,7 +40,7 @@ public class JsonWriterTest extends JsonTest{
             JsonReader reader = new JsonReader("./data/testWriterEmptyVisitorsList.json");
             visitorsList = reader.read();
             assertEquals(0, visitorsList.getAllNames().size());
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputFormatException e) {
             fail("Exception should not have been thrown");
         }
     }
@@ -99,7 +99,7 @@ public class JsonWriterTest extends JsonTest{
                     false, persons.get(1));
 
 
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputFormatException e) {
             fail("Exception should not have been thrown");
         }
     }

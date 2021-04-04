@@ -27,14 +27,14 @@ public class JsonReader {
 
     // EFFECTS: reads visitorslist from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public VisitorsList read() throws IOException {
+    public VisitorsList read() throws IOException, InvalidInputFormatException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseVisitorsList(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
-    private String readFile(String source) throws IOException {
+    private String readFile(String source) throws IOException, InvalidInputFormatException {
         StringBuilder contentBuilder = new StringBuilder();
 
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
@@ -44,7 +44,7 @@ public class JsonReader {
     }
 
     // EFFECTS: parses visitorslist from JSON object and returns it
-    private VisitorsList parseVisitorsList(JSONObject jsonObject) {
+    private VisitorsList parseVisitorsList(JSONObject jsonObject) throws InvalidInputFormatException {
         VisitorsList vl = new VisitorsList();
         addPersons(vl, jsonObject);
         return vl;
@@ -52,7 +52,7 @@ public class JsonReader {
 
     // MODIFIES: vl
     // EFFECTS: parses person from JSON object and adds them to visitorslist
-    private void addPersons(VisitorsList vl, JSONObject jsonObject) {
+    private void addPersons(VisitorsList vl, JSONObject jsonObject) throws InvalidInputFormatException {
         JSONArray jsonArray = jsonObject.getJSONArray("tracking");
         for (Object json : jsonArray) {
             JSONObject nextPerson = (JSONObject) json;
@@ -62,7 +62,7 @@ public class JsonReader {
 
     // MODIFIES: vl
     // EFFECTS: parses person from JSON object and adds it to visitorslist
-    private void addPerson(VisitorsList vl, JSONObject jsonObject) {
+    private void addPerson(VisitorsList vl, JSONObject jsonObject) throws InvalidInputFormatException {
 
         String name = jsonObject.getString("name");
         String phoneNumber = jsonObject.getString("phoneNumber");
@@ -71,6 +71,7 @@ public class JsonReader {
         Boolean status = jsonObject.getBoolean("status");
 
         Person p = new Person(name, phoneNumber);
+
         try {
             p.setTime(time);
             p.setDate(date);
