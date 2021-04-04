@@ -36,3 +36,7 @@ data burden on business owners.
 - As a user, I want to be able to save my visitor's list
 - As a user, I want to be able to reload my visitor's list and resume exactly where I left off at some earlier time
 
+Phase 4: Task 2
+
+I have chosen the option: test and design a class in your model package that is robust.
+This is seen in the Person class with the methods, "setTime", "setDate", "setPhoneNumber".

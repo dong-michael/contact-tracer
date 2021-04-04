@@ -1,5 +1,6 @@
 package ui;
 
+import exception.InvalidInputFormatException;
 import model.Person;
 import model.VisitorsList;
 import persistence.JsonReader;
@@ -17,9 +18,6 @@ Contact Tracer application. Some implementation methods were borrowed from Telle
 
 public class ContactTracerApp {
 
-    private Person jake;
-    private Person samantha;
-    private Person jordon;
     private VisitorsList store;
     private Scanner input;
     private boolean keepGoing;
@@ -79,16 +77,21 @@ public class ContactTracerApp {
     // EFFECTS: initializes stored visitors
     private void init() {
 
+
         store = new VisitorsList();
-        jake = new Person("Jake Krill", "6045942031");
-        samantha = new Person("Samantha Green", "604348321");
-        jordon = new Person("Jordon Wicker", "6043249012");
+        Person jake = new Person("Jake Krill", "6045942031");
+        Person samantha = new Person("Samantha Green", "604348321");
+        Person jordon = new Person("Jordon Wicker", "6043249012");
 
         store.addPerson(jake);
         store.addPerson(samantha);
         store.addPerson(jordon);
 
-        jake.setTime("18:00");
+        try {
+            jake.setTime("18:00");
+        } catch (InvalidInputFormatException e) {
+            System.out.println("Unable to set time");
+        }
         samantha.setStatusPositive();
 
         input = new Scanner(System.in);
@@ -291,7 +294,11 @@ public class ContactTracerApp {
 
         String name = firstName + " " + lastName;
 
-        store.getPerson(name).setTime(newTime);
+        try {
+            store.getPerson(name).setTime(newTime);
+        } catch (InvalidInputFormatException e) {
+            System.out.println("Unable to set time");
+        }
         System.out.println("Time of " + firstName + " " + lastName + " updated successfully.");
     }
 
@@ -314,7 +321,11 @@ public class ContactTracerApp {
 
         String name = firstName + " " + lastName;
 
-        store.getPerson(name).setDate(newDate);
+        try {
+            store.getPerson(name).setDate(newDate);
+        } catch (InvalidInputFormatException e) {
+            System.out.println("Unable to set date. Please enter a valid format");
+        }
         System.out.println(firstName + " " + lastName + "'s" + " date has been updated successfully.");
     }
 

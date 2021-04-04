@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidInputFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -71,21 +72,36 @@ public class VisitorsTest {
         testList.addPerson(visitor3);
         testList.addPerson(visitor4);
 
-        visitor1.setDate("21/12/2021");
-        assertTrue(testList.getVisitorsOnDay("21/12/2021").contains(visitor1));
-        assertFalse(testList.getVisitorsOnDay("21/12/2021").contains(visitor2));
+        try {
+            visitor1.setDate("21/12/2021");
+            assertTrue(testList.getVisitorsOnDay("21/12/2021").contains(visitor1));
+            assertFalse(testList.getVisitorsOnDay("21/12/2021").contains(visitor2));
+        } catch (InvalidInputFormatException e) {
+            fail("Exception should not be thrown");
+        }
 
-        visitor1.setDate("20/11/2020");
-        assertFalse(testList.getVisitorsOnDay("21/12/2021").contains(visitor1));
 
-        visitor1.setDate("22/09/2021");
-        visitor2.setDate("22/09/2021");
-        visitor3.setDate("23/09/2021");
-        visitor4.setDate("21/09/2021");
-        assertTrue(testList.getVisitorsOnDay("22/09/2021").contains(visitor1));
-        assertTrue(testList.getVisitorsOnDay("22/09/2021").contains(visitor2));
-        assertFalse(testList.getVisitorsOnDay("22/09/2021").contains(visitor3));
-        assertFalse(testList.getVisitorsOnDay("22/09/2021").contains(visitor4));
+        try {
+            visitor1.setDate("20/11/2020");
+            assertFalse(testList.getVisitorsOnDay("21/12/2021").contains(visitor1));
+        } catch (InvalidInputFormatException e) {
+            fail("Exception should not be thrown");
+        }
+
+
+        try {
+            visitor1.setDate("22/09/2021");
+            visitor2.setDate("22/09/2021");
+            visitor3.setDate("23/09/2021");
+            visitor4.setDate("21/09/2021");
+            assertTrue(testList.getVisitorsOnDay("22/09/2021").contains(visitor1));
+            assertTrue(testList.getVisitorsOnDay("22/09/2021").contains(visitor2));
+            assertFalse(testList.getVisitorsOnDay("22/09/2021").contains(visitor3));
+            assertFalse(testList.getVisitorsOnDay("22/09/2021").contains(visitor4));
+        } catch (InvalidInputFormatException e) {
+            fail("Exception should not be thrown");
+        }
+
 
     }
 
@@ -113,15 +129,20 @@ public class VisitorsTest {
         testList.addPerson(visitor4);
         testList.addPerson(visitor5);
 
-        visitor1.setTime("20:21");
-        visitor2.setTime("21:15");
-        visitor3.setTime("23:15");
-        visitor4.setTime("18:40");
+        try {
+            visitor1.setTime("20:21");
+            visitor2.setTime("21:15");
+            visitor3.setTime("23:15");
+            visitor4.setTime("18:40");
 
-        visitor1.setDate("22/09/2021");
-        visitor2.setDate("22/09/2021");
-        visitor3.setDate("23/09/2021");
-        visitor4.setDate("21/09/2021");
+            visitor1.setDate("22/09/2021");
+            visitor2.setDate("22/09/2021");
+            visitor3.setDate("23/09/2021");
+            visitor4.setDate("21/09/2021");
+        } catch (InvalidInputFormatException e) {
+           fail("Exception should not have been thrown");
+        }
+
 
         //check when both time and date results in no matches
 
@@ -145,14 +166,24 @@ public class VisitorsTest {
 
         //test change in day to match, but not time
 
-        visitor4.setDate("22/09/2021");
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
-        assertEquals(2,testList.getVisitorsAtTime("22/09/2021", "20:19").size());
+        try {
+            visitor4.setDate("22/09/2021");
+            assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+            assertEquals(2,testList.getVisitorsAtTime("22/09/2021", "20:19").size());
+        } catch (InvalidInputFormatException e) {
+            fail("Exception should not have been thrown");
+        }
+
 
         //set time to match
-        visitor4.setTime("20:30");
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
-        assertEquals(3,testList.getVisitorsAtTime("22/09/2021", "20:19").size());
+        try {
+            visitor4.setTime("20:30");
+            assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+            assertEquals(3,testList.getVisitorsAtTime("22/09/2021", "20:19").size());
+
+        } catch (InvalidInputFormatException e) {
+            fail("Exception should not have been thrown");
+        }
 
 
     }
@@ -163,36 +194,61 @@ public class VisitorsTest {
         testList.addPerson(visitor4);
         testList.addPerson(visitor5);
 
-        visitor1.setTime("20:21");
-        visitor2.setTime("21:15");
-        visitor3.setTime("23:15");
 
-        visitor1.setDate("22/09/2021");
-        visitor2.setDate("22/09/2021");
-        visitor3.setDate("23/09/2021");
+        try {
+            visitor1.setTime("20:21");
+            visitor2.setTime("21:15");
+            visitor3.setTime("23:15");
+            visitor1.setDate("22/09/2021");
+            visitor2.setDate("22/09/2021");
+            visitor3.setDate("23/09/2021");
+        } catch (InvalidInputFormatException e) {
+            fail("No exception should be thrown");
+        }
 
 
         //set time to be within range
-        visitor4.setTime("20:30");
-        visitor4.setDate("22/09/2021");
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+        try {
+            visitor4.setTime("20:30");
+            visitor4.setDate("22/09/2021");
+            assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+        } catch (InvalidInputFormatException e) {
+            fail("No exception should be thrown");
+        }
+
 
         //lower boundary test
-        visitor4.setTime("21:18");
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "23:17").contains(visitor4));
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:17").contains(visitor4));
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:18").contains(visitor4));
+        try {
+            visitor4.setTime("21:18");
+            assertFalse(testList.getVisitorsAtTime("22/09/2021", "23:17").contains(visitor4));
+            assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:17").contains(visitor4));
+            assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:18").contains(visitor4));
+        } catch (InvalidInputFormatException e) {
+            fail("No exception should be thrown");
+        }
+
 
         //exact match test
-        visitor4.setTime("20:19");
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "21:19").contains(visitor4));
+        try {
+            visitor4.setTime("20:19");
+            assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+            assertTrue(testList.getVisitorsAtTime("22/09/2021", "21:19").contains(visitor4));
+        } catch (InvalidInputFormatException e) {
+            fail("No exception should be thrown");
+        }
+
 
         //upper boundary test
-        visitor4.setTime("21:20");
-        assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:20").contains(visitor4));
-        assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:21").contains(visitor4));
+        try {
+            visitor4.setTime("21:20");
+            assertFalse(testList.getVisitorsAtTime("22/09/2021", "20:19").contains(visitor4));
+            assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:20").contains(visitor4));
+            assertTrue(testList.getVisitorsAtTime("22/09/2021", "20:21").contains(visitor4));
+
+        } catch (InvalidInputFormatException e) {
+            fail("No exception should be thrown");
+        }
+
 
     }
 

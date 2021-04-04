@@ -1,5 +1,6 @@
 package persistence;
 
+import exception.InvalidInputFormatException;
 import model.Person;
 import model.VisitorsList;
 import org.junit.jupiter.api.Test;
@@ -53,13 +54,30 @@ public class JsonWriterTest extends JsonTest{
             Person p1 = new Person("John Kav", "7782231254");
             Person p2 = new Person ("Sam Noei", "6045239283");
 
-            p1.setDate("25/10/2021");
+            try {
+                p1.setDate("25/10/2021");
+            } catch (InvalidInputFormatException e) {
+                System.out.println("No exception should be thrown");
+            }
             p1.setStatusPositive();
-            p1.setTime("10:00");
 
-            p2.setDate("22/01/2020");
+            try {
+                p1.setTime("10:00");
+            } catch (InvalidInputFormatException e) {
+                System.out.println("No exception should be thrown");
+            }
+
+            try {
+                p2.setDate("22/01/2020");
+            } catch (InvalidInputFormatException e) {
+                System.out.println("No exception should be thrown");
+            }
             p2.setStatusNegative();
-            p2.setTime("22:21");
+            try {
+                p2.setTime("22:21");
+            } catch (InvalidInputFormatException e) {
+                System.out.println("No exception should be thrown");
+            }
 
             vl.addPerson(p1);
             vl.addPerson(p2);

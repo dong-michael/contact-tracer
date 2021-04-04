@@ -1,5 +1,6 @@
 package persistence;
 
+import exception.InvalidInputFormatException;
 import model.Person;
 import model.VisitorsList;
 import org.json.JSONArray;
@@ -70,8 +71,12 @@ public class JsonReader {
         Boolean status = jsonObject.getBoolean("status");
 
         Person p = new Person(name, phoneNumber);
-        p.setTime(time);
-        p.setDate(date);
+        try {
+            p.setTime(time);
+            p.setDate(date);
+        } catch (InvalidInputFormatException e) {
+            e.printStackTrace();
+        }
 
         if (status) {
             p.setStatusPositive();

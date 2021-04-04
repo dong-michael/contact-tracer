@@ -1,9 +1,11 @@
 package ui;
 
+import exception.InvalidInputFormatException;
 import model.Person;
 import model.VisitorsList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +26,7 @@ import javax.sound.sampled.AudioSystem;
 // This class is dedicated to implementation of a GUI for contact tracing
 // Play button sound effect developed from code, modified from this tutorial: http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
 // Table row selection was developed from code, modified from this tutorial: https://www.codejava.net/java-se/swing/jtable-popup-menu-example
-public class ContactPanel extends JPanel {
+public class ContactGUI extends JPanel {
 
     private JPopupMenu popUp;
     private static JFrame frame;
@@ -43,12 +45,10 @@ public class ContactPanel extends JPanel {
 
     //CONSTRUCTOR
     //EFFECTS: initializes new table model, popup menu, data persistence components
-    public ContactPanel() {
+    public ContactGUI() {
 
         super(new BorderLayout());
-
         init();
-
         MyTableModel myTable = new MyTableModel();
 
         table = new JTable(myTable);
@@ -64,8 +64,8 @@ public class ContactPanel extends JPanel {
         menuAdd = new JMenuItem("Add New Contact");
         menuRemove = new JMenuItem("Remove Contact");
 
-        menuAdd.addActionListener(new PopAction());
-        menuRemove.addActionListener(new PopAction());
+        menuAdd.addActionListener(new PopUpAction());
+        menuRemove.addActionListener(new PopUpAction());
 
         popUp.add(menuAdd);
         popUp.add(menuRemove);
@@ -164,10 +164,10 @@ public class ContactPanel extends JPanel {
         }
     }
 
-    public class PopAction extends AbstractAction {
+    public class PopUpAction extends AbstractAction {
 
         //CONSTRUCTOR
-        PopAction() {
+        PopUpAction() {
             super("Popup Action");
         }
 
@@ -229,7 +229,6 @@ public class ContactPanel extends JPanel {
             jsonWriter.write(store);
             jsonWriter.close();
             System.out.println("Saved " + "Visitor's List" + " to " + JSON_STORE);
-
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -237,7 +236,6 @@ public class ContactPanel extends JPanel {
 
     // this class models the data in the form of a table
     class MyTableModel extends AbstractTableModel {
-
 
         //CONSTRUCTOR
         public MyTableModel() {
@@ -298,7 +296,6 @@ public class ContactPanel extends JPanel {
             return getValueAt(0, c).getClass();
         }
 
-
         //EFFECTS: sets all cells of the table as editable
         public boolean isCellEditable(int row, int col) {
             return true;
@@ -308,28 +305,67 @@ public class ContactPanel extends JPanel {
         //MODIFIES: this, visitorslist
         //EFFECTS: stores the value of the cells in the visitors list
         public void setValueAt(Object value, int row, int col) {
-
             Person selected = store.getAllPersons().get(row);
             switch (col) {
                 case 0:
                     selected.setName(value.toString());
                     break;
                 case 1:
-                    selected.setPhoneNumber(value.toString());
+                    setPhoneNumberToTable(value, selected);
                     break;
                 case 2:
-                    selected.setTime(value.toString());
+                    setTimeToTable(value, selected);
                     break;
                 case 3:
-                    selected.setDate(value.toString());
+                    setDateToTable(value, selected);
                     break;
                 case 4:
-                    if (value.toString().equals("true")) {
-                        selected.setStatusPositive();
-                    } else {
-                        selected.setStatusPositive();
-                    }
+                    setStatusToTable(value, selected);
                     break;
+            }
+
+        }
+
+
+        //MODIFIES: this
+        //EFFECTS: sets status of person in table according to value
+        private void setStatusToTable(Object value, Person selected) {
+            if (value.toString().equals("true")) {
+                selected.setStatusPositive();
+            } else {
+                selected.setStatusPositive();
+            }
+        }
+
+
+        //MODIFIES: this
+        //EFFECTS: sets date of person selected to value
+        private void setDateToTable(Object value, Person selected) {
+            try {
+                selected.setDate(value.toString());
+            } catch (InvalidInputFormatException e) {
+                System.out.println("Please enter a valid date");
+            }
+        }
+
+        //MODIFIES: this
+        //EFFECTS: sets time of person selected to value
+        private void setTimeToTable(Object value, Person selected) {
+            try {
+                selected.setTime(value.toString());
+            } catch (InvalidInputFormatException e) {
+                System.out.println("Please enter a valid time HH:mm");
+            }
+        }
+
+
+        //MODIFIES: this
+        //EFFECTS: sets phone number of person to value
+        private void setPhoneNumberToTable(Object value, Person selected) {
+            try {
+                selected.setPhoneNumber(value.toString());
+            } catch (InvalidInputFormatException e) {
+                System.out.println("Please enter a valid phone number");
             }
         }
     }
@@ -379,9 +415,14 @@ public class ContactPanel extends JPanel {
         store.addPerson(samantha);
         store.addPerson(jordon);
 
-        jake.setTime("18:00");
+        try {
+            jake.setTime("18:00");
+        } catch (InvalidInputFormatException e) {
+            e.printStackTrace();
+        }
         samantha.setStatusPositive();
     }
+
 
     //EFFECTS: creates and setup GUI
     private static void createAndShowGUI() {
@@ -390,7 +431,7 @@ public class ContactPanel extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        JComponent newContentPane = new ContactPanel();
+        JComponent newContentPane = new ContactGUI();
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
 
@@ -399,6 +440,7 @@ public class ContactPanel extends JPanel {
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
     }
+
 
 
     public static void main(String[] args) {
@@ -410,6 +452,10 @@ public class ContactPanel extends JPanel {
             }
         });
     }
+
+
+
+
 
 }
 

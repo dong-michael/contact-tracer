@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidInputFormatException;
 import org.json.JSONObject;
 import persistence.WriteableJ;
 
@@ -65,20 +66,31 @@ public class Person implements WriteableJ {
     }
 
 
-    //REQUIRES: string entered must be in format "HH:mm"
+
     //MODIFIES: this
-    //EFFECTS: sets the time of the person to timeString, in HH/mm in a 24 hour format.
-    public void setTime(String timeString) {
+    //EFFECTS: throws InvalidInputFormatException if timeString is not in HH/mm, otherwise
+    // sets the time of the person to timeString
+    public void setTime(String timeString) throws InvalidInputFormatException {
+
+        if (!timeString.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
+            throw new InvalidInputFormatException("Please enter the information in the correct format.");
+        }
+
         LocalTime localTime = LocalTime.parse(timeString, ofPattern("HH:mm"));
         LocalDate localDate = this.currentDate.toLocalDate();
         currentDate = localDate.atTime(localTime);
     }
 
 
-    //REQUIRES: date entered must be in format dd/MM/yyyy
+
     //MODIFIES: this
-    //EFFECTS: sets the date of visit in format dd/MM/yyyy
-    public void setDate(String dateString) {
+    //EFFECTS: throws InvalidInputFormatException if dateString is not in format dd/MM/yyyy,
+    // otherwise sets the date of visit to dateString
+    public void setDate(String dateString) throws InvalidInputFormatException {
+
+        if (!dateString.matches("^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$")) {
+            throw new InvalidInputFormatException("Please enter the information in the correct format.");
+        }
         LocalDate localDate = LocalDate.parse(dateString, ofPattern("dd/MM/yyyy"));
         LocalTime time = this.currentDate.toLocalTime();
         currentDate = localDate.atTime(time);
@@ -107,8 +119,14 @@ public class Person implements WriteableJ {
 
 
     //modifies: this
-    //EFFECTS: sets the name of the person
-    public void setPhoneNumber(String number) {
+    //EFFECTS: throws InvalidInputFormatException if number is not of format NNNNNNNNN,
+    // otherwise sets the phonenumber of the person to number
+    public void setPhoneNumber(String number) throws InvalidInputFormatException {
+
+        if (!number.matches("^\\d{10}$")) {
+            throw new InvalidInputFormatException("Please enter the information in the correct format.");
+        }
+
         this.phoneNumber = number;
     }
 
