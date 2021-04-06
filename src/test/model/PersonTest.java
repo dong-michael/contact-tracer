@@ -41,10 +41,11 @@ class PersonTest {
             assertEquals(visitor1.getDate().getDayOfMonth(), 10);
             assertEquals(visitor1.getDate().getYear(), 2020);
         } catch (InvalidInputFormatException e) {
-            //all good
+            fail("No Exception should be thrown");
         }
 
     }
+
     @Test
     public void timeTestNoExceptionLowerThrown() {
 
@@ -69,6 +70,31 @@ class PersonTest {
 
     }
 
+    @Test
+    public void timeTestExceptionThrown() {
+
+        try {
+            visitor1.setTime("30:45");
+            fail("Exception should have been thrown");
+        } catch (InvalidInputFormatException e) {
+            //all good
+        }
+
+    }
+
+
+    @Test
+    public void timeTestExceptionThrownChar() {
+
+        try {
+            visitor1.setTime("abc");
+            fail("Exception should have been thrown");
+        } catch (InvalidInputFormatException e) {
+            //all good
+        }
+
+    }
+
 
     @Test
     public void dateTestExceptionThrown() {
@@ -82,17 +108,6 @@ class PersonTest {
 
     }
 
-    @Test
-    public void timeTestExceptionThrown() {
-
-        try {
-            visitor1.setTime("25:45");
-            fail("Exception should have been thrown");
-        } catch (InvalidInputFormatException e) {
-            //all good
-        }
-
-    }
 
     @Test
     public void getStatusTest() {
