@@ -45,6 +45,6 @@ Phase 4: Task 3
 
 If I had more time, I would fix some of the cohesion issues in ContactGUI, since it has many responsibilities including,
 the layout of the GUI, creating buttons, actionlisteners, and playing sound. If I had more time I would refactor
-this class and add more separate classes such as a Button Class which would be extended by the save, load, and clear
+this class and add separate classes such as an abstract Button Class which would be extended by the save, load, and clear
 button. There would also be a class that would be dedicated to handling media files to produce sounds. I believe that 
 would improve the cohesion in this project.
