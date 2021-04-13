@@ -48,5 +48,3 @@ the layout of the GUI, creating buttons, actionlisteners, and playing sound. If 
 this class and add separate classes such as an abstract Button Class which would be extended by the save, load, and clear
 button. There would also be a class that would be dedicated to handling media files to produce sounds. I believe that 
 would improve the cohesion in this project.
-
-:)
