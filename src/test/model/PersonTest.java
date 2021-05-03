@@ -149,7 +149,7 @@ class PersonTest {
             visitor2.setPhoneNumber("77822930121");
             fail("Exception should have been thrown");
         } catch (InvalidInputFormatException e) {
-            //all good;
+            //expected
         }
 
         assertFalse(visitor2.getPhoneNumber().equals("77822930121"));
@@ -162,7 +162,7 @@ class PersonTest {
             visitor2.setPhoneNumber("778229301");
             fail("Exception should have been thrown");
         } catch (InvalidInputFormatException e) {
-           //all good
+           //expected
         }
 
         assertFalse(visitor2.getPhoneNumber().equals("778229301"));
@@ -175,7 +175,7 @@ class PersonTest {
             visitor2.setPhoneNumber("a778229309");
             fail("Exception should have been thrown");
         } catch (InvalidInputFormatException e) {
-            //all good
+            //expected
         }
 
         assertFalse(visitor2.getPhoneNumber().equals("a77822930"));
@@ -188,7 +188,7 @@ class PersonTest {
             visitor2.setPhoneNumber("aaaaaaaaaa");
             fail("Exception should have been thrown");
         } catch (InvalidInputFormatException e) {
-            //all good
+            //expected
         }
 
         assertFalse(visitor2.getPhoneNumber().equals("a77822930"));

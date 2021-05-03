@@ -27,7 +27,7 @@ data burden on business owners.
 
 ## User stories
 
-- As a user, I want to be able to enter a persons' name and phone number and store it in a visitor's list
+- As a user, I want to be able to enter a person's name and phone number and store it in a visitor's list
 - As a user, I want to be able to retrieve the names & phone number of people in my visitor's list that came in on a certain time or date
 - As a user, I want to be able to remove people from my visitor's list
 - As a user, I want to be able to retrieve the names of people who have screened positive from my visitor's list

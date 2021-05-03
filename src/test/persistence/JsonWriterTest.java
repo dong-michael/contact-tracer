@@ -24,7 +24,7 @@ public class JsonWriterTest extends JsonTest{
             writer.open();
             fail("IOException was expected");
         } catch (IOException e) {
-            // pass
+            // expected
         }
     }
 
