@@ -23,28 +23,3 @@ This project is of interest to me since I often myself in a lineup at restaurant
 about my contact information. This process is often slower than it needs to be, and often requires everyone to
 use the same writing instruments. ContactTracer's intention is to streamline this process and ease the information
 data burden on business owners. 
-
-
-## User stories
-
-- As a user, I want to be able to enter a person's name and phone number and store it in a visitor's list
-- As a user, I want to be able to retrieve the names & phone number of people in my visitor's list that came in on a certain time or date
-- As a user, I want to be able to remove people from my visitor's list
-- As a user, I want to be able to retrieve the names of people who have screened positive from my visitor's list
-- As a user, I want to be able to change the date or time of people in my visitor's list
-- As a user, I want to be able to change the status of a person in my visitor's list
-- As a user, I want to be able to save my visitor's list
-- As a user, I want to be able to reload my visitor's list and resume exactly where I left off at some earlier time
-
-Phase 4: Task 2
-
-I have chosen the option: test and design a class in your model package that is robust.
-This is seen in the Person class with the methods, "setTime".
-
-Phase 4: Task 3
-
-If I had more time, I would fix some of the cohesion issues in ContactGUI, since it has many responsibilities including,
-the layout of the GUI, creating buttons, actionlisteners, and playing sound. If I had more time I would refactor
-this class and add separate classes such as an abstract Button Class which would be extended by the save, load, and clear
-button. There would also be a class that would be dedicated to handling media files to produce sounds. I believe that 
-would improve the cohesion in this project.
